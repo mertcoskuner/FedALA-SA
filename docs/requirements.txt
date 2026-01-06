@@ -1,0 +1,29 @@
+# dependencies required for documentation
+# NOT: PyTorch ve PyG bağımlılıkları ana dizinde kurulmalıdır
+# Bu dosya sadece dokümantasyon araçları için kullanılır
+
+# Dokümantasyon araçları
+furo
+setuptools
+sphinxcontrib-bibtex
+matplotlib
+sphinx_gallery
+sphinx-autobuild
+sphinx_rtd_theme
+sphinx
+ruamel.yaml
+
+# Bilimsel kütüphaneler (eğer kurulu değilse)
+pandas
+scipy
+scikit-learn
+
+# Opsiyonel bağımlılıklar
+pyro-api
+pyro-ppl
+numba
+
+# NOT: PyTorch ve PyTorch Geometric'i ana dizinde kurun:
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+# pip install torch-scatter torch-sparse torch-cluster torch-spline-conv -f https://data.pyg.org/whl/torch-{VERSION}+cu118.html
+# pip install torch-geometric
