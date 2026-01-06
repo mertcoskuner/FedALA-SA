@@ -1,83 +1,76 @@
-# FedALA-SA Implementation
+# 🚀 FedALA-SA: Structure-Aware Federated Learning
 
-This project implements **FedALA-SA** (Structure-Aware), an enhanced version of FedALA for OpenFGL benchmark.
+![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C?style=for-the-badge&logo=pytorch)
+![Federated Learning](https://img.shields.io/badge/Federated-Learning-green?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-purple?style=for-the-badge)
 
-## Implementation Details
+**FedALA-SA** is a cutting-edge framework extending **FedALA** with Structure-Aware capabilities, designed to tackle the heterogeneity in Federated Graph Learning (FGL). By integrating topological insights and privacy-preserving mechanisms, FedALA-SA offers a robust solution for decentralized graph data analysis.
 
-We implemented a new algorithm module `fedala_sa` in `openfgl/flcore/fedala_sa`.
-It supports 3 options as requested:
+---
 
-### Option 1: Degree-based Scaling (Server-side)
-- **Concept:** Clients with denser subgraphs (higher average degree) contribute more to the global model.
-- **Implementation:** 
-    - Client calculates `avg_degree` of its local subgraph.
-    - Server aggregates updates using `weight = num_samples * avg_degree` instead of just `num_samples`.
-- **Code:** `FedALAClient.send_message` sends `avg_degree`, `FedALAServer.execute` uses it.
+## 🌟 Key Features
 
-### Option 2: Proximal Term (Client-side)
-- **Concept:** Prevent drastic shift from global model due to non-IID subgraphs.
-- **Implementation:**
-    - Adds a proximal term to the local loss function: `Loss = TaskLoss + (mu / 2) * ||w - w_global||^2`.
-    - `mu` defaults to 0.01.
-- **Code:** `FedALAClient.train_prox` implements the custom training loop.
+*   **Structure-Aware Aggregation**: Leverages graph topology (Degree & Layer-wise) to optimize model updates.
+*   **Privacy-First Design**: Integrated Differential Privacy (DP) mechanisms (Gaussian Noise) for secure collaboration.
+*   **Scalable Architecture**: Tested and validated on scalable client setups (10-20+ clients).
+*   **Automated Benchmarking**: One-click reproduction of baseline vs. innovation scenarios.
+*   **Visual Analytics**: Automatic generation of convergence curves and ablation study plots.
 
-### Option 3: Classifier-only Adaptive Aggregation (Client-side)
-- **Concept:** Feature extraction layers are generalized, classifier layers are personalized.
-- **Implementation:**
-    - `ALAModule` is initialized only for classifier layers (layers containing "classifier" or "fc" in name, or last layers).
-    - Other layers use standard global model parameters without adaptive aggregation.
-- **Code:** `ALAModule` accepts `target_layers`. `FedALAClient` identifies classifier layers.
+---
 
-## Prerequisites
+## 🛠️ Installation
 
-Ensure you have the following additional libraries installed for plotting:
+Get started in minutes! Ensure you have Python 3.10+ installed.
+
+### 1. Clone the Repository
 ```bash
-pip install seaborn matplotlib pandas
+git clone https://github.com/mertcoskuner/FedALA-SA.git
+cd FedALA-SA
 ```
 
-## Scripts
+### 2. Install Dependencies
+We have prepared a `requirements.txt` with all necessary packages (including CUDA-enabled PyTorch).
 
-### 1. `run_reproduction.py`
-- Reproduces vanilla FedALA results (Table 7 baseline).
-- Datasets: Cora, CiteSeer, PubMed, Photo, Computers, Chameleon, Actor.
-- Trials: 3.
-- Output: `fedala_reproduction_results.csv`.
-
-**Run:**
 ```bash
-python run_reproduction.py
+pip install -r requirements.txt
 ```
 
-### 2. `run_fedala_sa.py`
-This is the main benchmark script for the proposed method. It runs a comprehensive set of experiments:
+> **Note:** If you are using a specific CUDA version (e.g., CUDA 11.8), the `requirements.txt` already handles the extra index URL for PyTorch.
 
-**Scenarios:**
-1. **Baseline**: Standard FedALA.
-2. **Options 1, 2, 3**: The three proposed Structure-Aware strategies.
-3. **Privacy**: Option 2 combined with Differential Privacy (Gaussian Mechanism).
-4. **Scalability**: Runs the above comparisons for both **10 clients** and **20 clients**.
+---
 
-**Outputs:**
-- **CSV Results**: `fedala_sa_final_results.csv` (Contains Mean±Std for all scenarios).
-- **Plots**:
-    - `fedala_sa_ablation_study.png`: Bar chart comparing Baseline vs Opt 2 vs Privacy.
-    - `fedala_sa_convergence_{dataset}.png`: Learning curves (Accuracy vs Rounds) for all methods.
-    - `graph_full_scalability.png`: Performance comparison between 10 and 20 clients.
+## 🚀 Usage
 
-**Run:**
+### Run the Main Benchmark
+Execute the comprehensive benchmark script to reproduce the paper's results (Baseline vs. FedALA-SA vs. Privacy):
+
 ```bash
 python run_fedala_sa.py
 ```
 
-### 3. `run_all.sh`
-- Helper script to run both experiments sequentially.
-- Automatically handles package installation and execution.
+**What this does:**
+*   Runs 3 critical scenarios:
+    1.  **Baseline**: Vanilla FedALA
+    2.  **Innovation**: FedALA-SA (Structure-Aware)
+    3.  **Privacy**: FedALA-SA + Differential Privacy
+*   Tests scalability (10 vs 20 Clients).
+*   💾 Saves results to `fedala_sa_final_results.csv`.
+*   📊 Generates plots (`fedala_sa_ablation_study.png`, `fedala_sa_convergence_*.png`).
 
-**Run:**
-```bash
-bash run_all.sh
+---
+
+## 📊 project Structure
+
+```
+FedALA-SA/
+├── 📂 data/               # Dataset storage
+├── 📂 openfgl/            # Core library files
+├── 📄 run_fedala_sa.py    # Main reproduction script
+├── 📄 plots.py            # Plotting utilities
+├── 📄 requirements.txt    # Dependency list
+└── 📄 README.md           # This file
 ```
 
-## Expected Results
-- `fedala_sa_final_results.csv` will summarize the performance.
-- Check the generated `.png` files for visual analysis of convergence and scalability.
+---
+
