@@ -1,4 +1,4 @@
-# 🚀 FedALA-SA: Structure-Aware Federated Learning
+# FedALA-SA: Structure-Aware Federated Learning
 
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python)
 ![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C?style=for-the-badge&logo=pytorch)
@@ -9,7 +9,7 @@
 
 ---
 
-## 🌟 Key Features
+## Key Features
 
 *   **Structure-Aware Aggregation**: Leverages graph topology (Degree & Layer-wise) to optimize model updates.
 *   **Privacy-First Design**: Integrated Differential Privacy (DP) mechanisms (Gaussian Noise) for secure collaboration.
@@ -19,7 +19,7 @@
 
 ---
 
-## 🛠️ Installation
+## Installation
 
 Get started in minutes! Ensure you have Python 3.10+ installed.
 
@@ -40,7 +40,7 @@ pip install -r requirements.txt
 
 ---
 
-## 🚀 Usage
+## Usage
 
 ### Run the Main Benchmark
 Execute the comprehensive benchmark script to reproduce the paper's results (Baseline vs. FedALA-SA vs. Privacy):
@@ -55,22 +55,27 @@ python run_fedala_sa.py
     2.  **Innovation**: FedALA-SA (Structure-Aware)
     3.  **Privacy**: FedALA-SA + Differential Privacy
 *   Tests scalability (10 vs 20 Clients).
-*   💾 Saves results to `fedala_sa_final_results.csv`.
-*   📊 Generates plots (`fedala_sa_ablation_study.png`, `fedala_sa_convergence_*.png`).
+*   Saves results to `fedala_sa_final_results.csv`.
+*   Generates plots (`fedala_sa_ablation_study.png`, `fedala_sa_convergence_*.png`).
 
 ---
 
-## 📊 project Structure
+## Project Structure
 
 ```
 FedALA-SA/
-├── 📂 data/               # Dataset storage
-├── 📂 openfgl/            # Core library files
-├── 📄 run_fedala_sa.py    # Main reproduction script
-├── 📄 plots.py            # Plotting utilities
-├── 📄 requirements.txt    # Dependency list
-└── 📄 README.md           # This file
+├── data/               # Dataset storage
+├── openfgl/            # Core library files
+├── run_fedala_sa.py    # Main reproduction script
+├── plots.py            # Plotting utilities
+├── requirements.txt
+└── README.md
 ```
 
 ---
 
+## Results
+
+Experimental outputs, including detailed logs for all benchmark scenarios (Baseline, FedALA-SA, and Privacy), per-client statistics, loss/accuracy metrics, and round-by-round summaries are recorded in [slurm_sa_355368.out](./slurm_sa_355368.out). 
+
+By examining this file, you can trace the evolution of model performance, compare experimental configurations, and verify the reproducibility of the results reported in the paper. For convenience, you may wish to search for keywords such as `accuracy_test`, `best_val_accuracy`, or specific scenario names within the log to locate key results.
