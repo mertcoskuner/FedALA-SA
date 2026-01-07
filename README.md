@@ -1,10 +1,5 @@
 # FedALA-SA: Structure-Aware Federated Learning
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.0%2B-EE4C2C?style=for-the-badge&logo=pytorch)
-![Federated Learning](https://img.shields.io/badge/Federated-Learning-green?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-purple?style=for-the-badge)
-
 **FedALA-SA** is a cutting-edge framework extending **FedALA** with Structure-Aware capabilities, designed to tackle the heterogeneity in Federated Graph Learning (FGL). By integrating topological insights and privacy-preserving mechanisms, FedALA-SA offers a robust solution for decentralized graph data analysis.
 
 ---
